@@ -10,7 +10,7 @@ Single canonical **arcintel** repo. Backend/data layer (Phase 0) and hub UI (Pha
 | `lib/db.ts`, `lib/tenant/*` | Backend | All tenant-scoped data access |
 | `lib/content-blocks/`, `lib/quiz/`, `lib/contracts/` | Backend | Partner imports types/schemas only |
 | `app/api/auth/`, `app/api/health/`, `app/api/v1/` | Backend | JSON API + auth handlers |
-| `app/(hub)/`, `components/` | Partner (Phase 1+) | Hub, lesson player, account UI |
+| `app/(hub)/`, `components/` | Partner (Phase 1+) | Hub, lesson player, account UI — follow [`FRONTEND-GUIDELINES.md`](FRONTEND-GUIDELINES.md) |
 | `tests/integration/` | Backend | Cross-tenant isolation tests |
 
 ## Data access rules
