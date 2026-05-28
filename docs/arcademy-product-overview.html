@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcademy Product Overview</title>
+    <style>
+      :root {
+        --bg: #eef2f7;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --line: #d6deea;
+        --brand: #00b7c7;
+        --brand-dark: #0e7490;
+        --ok: #0f766e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .layout {
+        max-width: 1380px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 220px 1fr 210px;
+        gap: 24px;
+        padding: 0 20px 24px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        background: #e8edf4;
+        border-right: 1px solid var(--line);
+        padding: 20px 14px;
+      }
+
+      .brand {
+        font-size: 1.28rem;
+        font-weight: 700;
+      }
+
+      .tag {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 0.84rem;
+        letter-spacing: 0.02em;
+      }
+
+      .nav {
+        margin-top: 18px;
+        display: grid;
+        gap: 7px;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #0f172a;
+        border: 1px solid transparent;
+        padding: 8px 10px;
+        border-radius: 7px;
+        background: transparent;
+        font-size: 0.92rem;
+      }
+
+      .nav a:first-child {
+        background: #dbf8fc;
+        border-color: #9fe8ef;
+      }
+
+      .nav a:hover {
+        border-color: var(--brand);
+        background: #f6fbff;
+      }
+
+      .content {
+        background: var(--panel);
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        min-height: 100vh;
+        padding: 14px 24px 26px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 8px;
+      }
+
+      .search {
+        width: 250px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f8fafd;
+        color: #64748b;
+        font-size: 0.85rem;
+        padding: 8px 10px;
+      }
+
+      .hero {
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 16px;
+        padding: 8px 0 18px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 9px;
+        line-height: 1.18;
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 2px;
+      }
+
+      p {
+        margin: 0 0 12px;
+        color: #293548;
+        max-width: 840px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #475569;
+        border: 1px solid #cfd8e6;
+        border-radius: 4px;
+        padding: 4px 6px;
+        margin-bottom: 10px;
+      }
+
+      .usp {
+        border-left: 4px solid var(--brand);
+        padding: 10px 12px;
+        background: #eefcff;
+        border-radius: 6px;
+      }
+
+      .section {
+        border-bottom: 1px solid var(--line);
+        padding: 18px 0 18px;
+        margin-bottom: 2px;
+      }
+
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .module-card {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 12px;
+        background: #fbfdff;
+      }
+
+      .module-card img {
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 8px;
+      }
+
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+
+      .diagram {
+        margin-top: 12px;
+        border: 1px dashed #bfd0e5;
+        border-radius: 6px;
+        padding: 8px;
+        background: #f8fbff;
+      }
+
+      .diagram svg {
+        width: 100%;
+        height: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 0.93rem;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef4fd;
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #314159;
+      }
+
+      .check {
+        color: var(--ok);
+        font-weight: 700;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 10px;
+      }
+
+      .time-card {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--brand-dark);
+        border-radius: 6px;
+        padding: 12px;
+        background: #f9fbff;
+      }
+
+      .note {
+        margin-top: 12px;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 14px 0 24px;
+        font-size: 0.82rem;
+      }
+
+      .toc {
+        position: sticky;
+        top: 14px;
+        height: fit-content;
+        font-size: 0.86rem;
+        color: #475569;
+        padding-top: 14px;
+      }
+
+      .toc h4 {
+        margin: 0 0 10px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #334155;
+      }
+
+      .toc a {
+        display: block;
+        text-decoration: none;
+        color: #475569;
+        padding: 5px 0;
+      }
+
+      .toc a:hover {
+        color: #0f172a;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+          padding: 14px;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: 1px solid var(--line);
+          border-radius: 8px;
+        }
+
+        .module-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          display: none;
+        }
+
+        .content {
+          border: 1px solid var(--line);
+          border-radius: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">Arcademy</div>
+        <div class="tag">Product Overview</div>
+        <nav class="nav">
+          <a href="#hook">The Hook</a>
+          <a href="#modules">Feature Modules</a>
+          <a href="#matrix">Features Matrix</a>
+          <a href="#roadmap">Roadmap</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <div class="topbar">
+          <div class="search">Search docs...</div>
+        </div>
+
+        <section class="hero" id="hook">
+          <span class="eyebrow">Introduction</span>
+          <h1>Executive Summary</h1>
+          <p>
+            Arcademy is onboarding infrastructure built for ecosystem adoption. It closes the gap between static documentation and real user readiness by guiding people through structured programs and confirming understanding.
+          </p>
+          <p class="usp">
+            Arcademy turns onboarding into a measurable system: guided programs, partner-ready program creation tools, and immutable proof of understanding through a soulbound award.
+          </p>
+        </section>
+
+        <section class="section" id="modules">
+          <h2>Core Feature Modules</h2>
+          <p>Each module focuses on clear outcomes and practical value for users and partners.</p>
+
+          <div class="module-grid">
+            <article class="module-card">
+              <img
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80"
+                alt="Developer workstation"
+              />
+              <h3>Guided Onboarding Programs</h3>
+              <p>Programs move people through content in a clear order so they always know what to do next.</p>
+              <ul>
+                <li>Reduces confusion and drop-off.</li>
+                <li>Gives users a predictable learning path.</li>
+                <li>Improves time-to-confidence for new users.</li>
+              </ul>
+              <div class="diagram">
+                <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Program flow">
+                  <rect x="10" y="20" width="110" height="48" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+                  <rect x="145" y="20" width="110" height="48" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+                  <rect x="280" y="20" width="110" height="48" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+                  <rect x="415" y="20" width="95" height="48" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+                  <text x="30" y="49" font-size="14">Start</text>
+                  <text x="165" y="49" font-size="14">Lesson</text>
+                  <text x="300" y="49" font-size="14">Check</text>
+                  <text x="430" y="49" font-size="14">Complete</text>
+                  <path d="M120 44h20M255 44h20M390 44h20" stroke="#0891b2" stroke-width="2" />
+                </svg>
+              </div>
+            </article>
+
+            <article class="module-card">
+              <img
+                src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=900&q=80"
+                alt="Product planning board"
+              />
+              <h3>Program Creation Tooling</h3>
+              <p>Partners and teams can create, organize, and improve onboarding programs without technical complexity.</p>
+              <ul>
+                <li>Faster launch of partner programs.</li>
+                <li>Consistent quality across all materials.</li>
+                <li>Simple updates with governed publishing flow.</li>
+              </ul>
+              <div class="diagram">
+                <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Creation flow">
+                  <circle cx="45" cy="45" r="24" fill="#e0f2fe" stroke="#0ea5e9" />
+                  <circle cx="185" cy="45" r="24" fill="#e0f2fe" stroke="#0ea5e9" />
+                  <circle cx="325" cy="45" r="24" fill="#e0f2fe" stroke="#0ea5e9" />
+                  <circle cx="465" cy="45" r="24" fill="#e0f2fe" stroke="#0ea5e9" />
+                  <text x="28" y="49" font-size="12">Draft</text>
+                  <text x="167" y="49" font-size="12">Review</text>
+                  <text x="302" y="49" font-size="12">Publish</text>
+                  <text x="448" y="49" font-size="12">Measure</text>
+                  <path d="M69 45h92M209 45h92M349 45h92" stroke="#0ea5e9" stroke-width="2" />
+                </svg>
+              </div>
+            </article>
+
+            <article class="module-card">
+              <img
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80"
+                alt="Team reviewing analytics dashboard"
+              />
+              <h3>Proof of Understanding</h3>
+              <p>Completion means users proved they understood the material. Qualified users receive an immutable soulbound token tied to verified completion.</p>
+              <ul>
+                <li>Builds trust in completion results.</li>
+                <li>Helps partners identify ready users.</li>
+                <li>Creates durable proof that cannot be transferred.</li>
+              </ul>
+              <div class="diagram">
+                <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proof flow">
+                  <rect x="10" y="20" width="150" height="48" rx="8" fill="#ecfeff" stroke="#14b8a6" />
+                  <rect x="185" y="20" width="150" height="48" rx="8" fill="#ecfeff" stroke="#14b8a6" />
+                  <rect x="360" y="20" width="150" height="48" rx="8" fill="#ecfeff" stroke="#14b8a6" />
+                  <text x="24" y="49" font-size="12">Complete Program</text>
+                  <text x="206" y="49" font-size="12">Pass Understanding</text>
+                  <text x="377" y="49" font-size="12">Soulbound Award</text>
+                  <path d="M160 44h25M335 44h25" stroke="#14b8a6" stroke-width="2" />
+                </svg>
+              </div>
+            </article>
+
+            <article class="module-card">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+                alt="People collaborating"
+              />
+              <h3>Partner and User Visibility</h3>
+              <p>Arcademy gives both users and partners clear visibility into progress, readiness, and where support is needed.</p>
+              <ul>
+                <li>Shows progress in a simple, actionable way.</li>
+                <li>Highlights where users get stuck.</li>
+                <li>Supports better partner planning and support decisions.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="matrix">
+          <h2>Features Matrix</h2>
+          <p>This matrix combines plan tiers and a full capabilities checklist for quick comparison.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>Starter</th>
+                <th>Growth</th>
+                <th>Enterprise</th>
+                <th>Checklist Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Guided onboarding programs</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">Included</td>
+              </tr>
+              <tr>
+                <td>Program creation tooling</td>
+                <td>—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">Included</td>
+              </tr>
+              <tr>
+                <td>Comprehension checks</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">Included</td>
+              </tr>
+              <tr>
+                <td>Immutable soulbound proof of understanding</td>
+                <td>—</td>
+                <td>—</td>
+                <td class="check">✓</td>
+                <td>Available in enterprise verification scope</td>
+              </tr>
+              <tr>
+                <td>Progress visibility dashboard</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">Included</td>
+              </tr>
+              <tr>
+                <td>Partner onboarding governance</td>
+                <td>—</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">Included</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section" id="roadmap">
+          <h2>Roadmap</h2>
+          <p>Direction-focused timeline. No fixed dates are promised.</p>
+          <div class="timeline">
+            <article class="time-card">
+              <h3>Next 3 Months</h3>
+              <ul>
+                <li>Expand onboarding program templates for faster launches.</li>
+                <li>Ship improved authoring flow for partner program creation.</li>
+                <li>Strengthen understanding checks and completion clarity.</li>
+              </ul>
+            </article>
+
+            <article class="time-card">
+              <h3>Next 6 Months</h3>
+              <ul>
+                <li>Broaden progress visibility for partners and internal teams.</li>
+                <li>Improve lifecycle controls for review, publishing, and updates.</li>
+                <li>Scale program quality tools across more partner groups.</li>
+              </ul>
+            </article>
+
+            <article class="time-card">
+              <h3>Future Vision</h3>
+              <ul>
+                <li>Make immutable proof of understanding easier to verify across ecosystems.</li>
+                <li>Deepen partner-level intelligence on readiness and support load.</li>
+                <li>Set the standard for onboarding infrastructure beyond static documentation.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="note">
+            This overview is intended to fully familiarize users and partners with Arcademy in plain language.
+          </p>
+        </section>
+      </main>
+
+      <aside class="toc">
+        <h4>On this page</h4>
+        <a href="#hook">Core Thesis</a>
+        <a href="#modules">Feature Modules</a>
+        <a href="#matrix">Features Matrix</a>
+        <a href="#roadmap">Roadmap</a>
+      </aside>
+    </div>
+    <footer>Arcademy product overview and capabilities guide</footer>
+  </body>
+</html>
