@@ -132,10 +132,10 @@ A program appears on the public hub only when **all** are true: `hub_status` is 
 | `/programs/[programSlug]` | 1 | Program home: path, enroll/continue CTA |
 | `/programs/[programSlug]/lessons/[lessonSlug]` | 1 | Lesson player |
 | `/account` | 1 | Global learner: enrollments, per-program progress |
-| `/staff/*` | 2 | Staff Studio (org/program scoped authoring + publish). **Slices A–C shipped:** program shell, curriculum outline (add/reorder/edit/delete lessons), lesson block editor + quiz + preview — see `docs/superpowers/specs/2026-05-28-staff-program-shell-design.md`, `2026-05-29-staff-curriculum-outline-design.md`, `2026-05-29-staff-lesson-editor-design.md`. |
+| `/staff/*` | 2 | Staff Studio (org/program scoped authoring + publish). **Slices A–C + publish lifecycle shipped:** program shell, curriculum outline, lesson block editor + quiz + preview, draft/review/approve FSM, publish + rollback — see `docs/superpowers/specs/2026-05-28-staff-program-shell-design.md`, `2026-05-29-staff-curriculum-outline-design.md`, `2026-05-29-staff-lesson-editor-design.md`, `2026-05-31-staff-publish-lifecycle-design.md`. |
 | `/partner/*` | 3 | Partner Studio (trusted orgs, draft + submit for review) |
 
-There is no `/modules` route. Optional redirects from a prior product belong in edge config or `middleware.ts` — not in core routing design.
+There is no `/modules` route. Legacy `/modules/*` requests are **301-redirected** to `/programs/arcium/*` via [`proxy.ts`](../../proxy.ts) (see [`lib/routing/legacy-redirects.ts`](../../lib/routing/legacy-redirects.ts)).
 
 ---
 
@@ -292,6 +292,7 @@ Trust gate is **manual**: staff sets `organization.trust_level = self_serve_draf
 | 2 | Enroll on **explicit Enroll button** on program home (not first activity). Pins `active_published_version_id` at enroll time. | 1 |
 | 3 | Partner preview tokens: TTL and auth? | 2 |
 | 4 | ~~Neon pooler vs unpooled for RLS session vars?~~ **Resolved:** use `DATABASE_URL_UNPOOLED` for migrations, seeds, and all `withTenantTransaction()` calls; pooled URL reserved for future read-only paths. | 0 |
+| 5 | ~~Existing Arcium learners: pin to curriculum v1 automatically on deploy?~~ **Resolved:** migration `008_arcium_enrollment_backfill.sql` backfills `program_enrollment` for users with Arcium v1 progress; guest merge creates enrollment on first authenticated activity. | 0 |
 | 6 | Legal: partner terms for user progress data sharing? | 2 |
 
 Record answers here when decided.

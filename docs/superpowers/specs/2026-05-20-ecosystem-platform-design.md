@@ -556,10 +556,10 @@ org.trust_level_changed
 - [ ] Migrations: organization, program, curriculum/version, lesson_version, quiz_version  
 - [ ] RLS policies + `withTenantTransaction`  
 - [ ] Scoped repositories; refactor `lib/content.ts` → program-aware reads  
-- [ ] Migrate Arcium content to program `arcium` v1  
-- [ ] Redirect `/modules/*` → `/programs/arcium/*`  
-- [ ] Progress backfill with version FKs  
-- [ ] Block schema v1 (validate existing content; migrate body_sections)  
+- [x] Migrate Arcium content to program `arcium` v1  
+- [x] Redirect `/modules/*` → `/programs/arcium/*`  
+- [x] Progress backfill with version FKs  
+- [x] Block schema v1 (validate existing content; migrate body_sections)  
 
 **Exit criteria:** Arcium lessons work under new model; cross-tenant integration tests pass.
 
@@ -666,7 +666,7 @@ org.trust_level_changed
 | 2 | Enroll explicitly vs on first activity? | Product | Phase 1 |
 | 3 | Partner preview tokens: TTL and auth? | Eng | Phase 2 |
 | 4 | Neon RLS + pooled connections: use `@neondatabase/serverless` transaction hooks or unpooled for writes? | Eng | Phase 0 |
-| 5 | Existing Arcium learners: pin to curriculum v1 automatically on deploy? | Eng | Phase 0 migration |
+| 5 | ~~Existing Arcium learners: pin to curriculum v1 automatically on deploy?~~ **Resolved:** yes — `008_arcium_enrollment_backfill.sql` on deploy; guest merge creates enrollment on first activity. | Eng | Phase 0 migration |
 | 6 | Legal: partner terms for user progress data sharing? | Product/Legal | Phase 2 |
 
 ### Risks
