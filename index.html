@@ -1,0 +1,1003 @@
+<!doctype html>
+<!-- docs-sync-pat-test: 2026-05-28 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcademy — Product &amp; Build Spec</title>
+    <style>
+      :root {
+        --bg: #eef2f7;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --line: #d6deea;
+        --brand: #00b7c7;
+        --brand-dark: #0e7490;
+        --now: #0f766e;
+        --next: #1d4ed8;
+        --later: #6b7280;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .layout {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 0;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        background: #e8edf4;
+        border-right: 1px solid var(--line);
+        padding: 20px 14px 32px;
+      }
+
+      .brand {
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      .tag {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .nav {
+        margin-top: 20px;
+        display: grid;
+        gap: 4px;
+      }
+
+      .nav-group {
+        margin-top: 14px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        font-weight: 600;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #0f172a;
+        border: 1px solid transparent;
+        padding: 7px 10px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      .nav a:hover {
+        border-color: var(--brand);
+        background: #f6fbff;
+      }
+
+      .nav a.now {
+        background: #d1fae5;
+        border-color: #6ee7b7;
+        font-weight: 600;
+      }
+
+      .content {
+        background: var(--panel);
+        padding: 28px 36px 48px;
+      }
+
+      .hero {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 24px;
+        margin-bottom: 8px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        margin: 0 0 10px;
+        line-height: 1.15;
+      }
+
+      h2 {
+        font-size: 1.65rem;
+        margin: 0 0 12px;
+        line-height: 1.2;
+      }
+
+      h3 {
+        font-size: 1.15rem;
+        margin: 0 0 8px;
+      }
+
+      p {
+        margin: 0 0 12px;
+        color: #293548;
+        max-width: 72ch;
+      }
+
+      .lead {
+        font-size: 1.08rem;
+        max-width: 68ch;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #475569;
+        border: 1px solid #cfd8e6;
+        border-radius: 4px;
+        padding: 4px 8px;
+        margin-bottom: 12px;
+      }
+
+      .callout {
+        border-left: 4px solid var(--brand);
+        padding: 12px 14px;
+        background: #eefcff;
+        border-radius: 0 6px 6px 0;
+        margin: 16px 0;
+        max-width: 72ch;
+      }
+
+      .callout strong {
+        color: var(--brand-dark);
+      }
+
+      .section {
+        border-bottom: 1px solid var(--line);
+        padding: 28px 0;
+      }
+
+      .section:last-child {
+        border-bottom: none;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0 16px;
+      }
+
+      .pill {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #f8fafc;
+      }
+
+      .pill.now {
+        background: #d1fae5;
+        border-color: #6ee7b7;
+        color: #065f46;
+      }
+
+      .pill.next {
+        background: #dbeafe;
+        border-color: #93c5fd;
+        color: #1e40af;
+      }
+
+      .pill.later {
+        background: #f3f4f6;
+        color: #4b5563;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: #fbfdff;
+      }
+
+      .card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+        color: #334155;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      .diagram {
+        margin: 16px 0;
+        border: 1px dashed #bfd0e5;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fbff;
+        max-width: 100%;
+      }
+
+      .diagram svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .diagram-caption {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 8px;
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 0.92rem;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef4fd;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #314159;
+      }
+
+      .phase-block {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 14px;
+        overflow: hidden;
+      }
+
+      .phase-head {
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .phase-head h3 {
+        margin: 0;
+      }
+
+      .phase-head .when {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .phase-0 .phase-head {
+        background: #d1fae5;
+        border-bottom: 1px solid #6ee7b7;
+      }
+
+      .phase-1 .phase-head {
+        background: #dbeafe;
+        border-bottom: 1px solid #93c5fd;
+      }
+
+      .phase-2 .phase-head,
+      .phase-3 .phase-head {
+        background: #f3f4f6;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .phase-4 .phase-head {
+        background: #faf5ff;
+        border-bottom: 1px solid #e9d5ff;
+      }
+
+      .phase-body {
+        padding: 14px 16px 16px;
+      }
+
+      .task-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .task-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #edf2f7;
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .task-list li:last-child {
+        border-bottom: none;
+      }
+
+      .task-id {
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+        color: #64748b;
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        width: fit-content;
+      }
+
+      .exit {
+        margin-top: 12px;
+        padding: 10px 12px;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 6px;
+        font-size: 0.92rem;
+      }
+
+      .exit strong {
+        color: #166534;
+      }
+
+      .do-not {
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        border-radius: 6px;
+        padding: 12px 14px;
+        margin-top: 14px;
+        max-width: 72ch;
+      }
+
+      .do-not h4 {
+        margin: 0 0 8px;
+        color: #9a3412;
+      }
+
+      footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 20px;
+        font-size: 0.82rem;
+        grid-column: 1 / -1;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+        }
+
+        .three-col {
+          grid-template-columns: 1fr;
+        }
+
+        .content {
+          padding: 20px 18px 32px;
+        }
+
+        .task-list li {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">Arcademy</div>
+        <div class="tag">Product &amp; build spec</div>
+        <nav class="nav">
+          <div class="nav-group">Understand</div>
+          <a href="#vision">Vision</a>
+          <a href="#who">Who uses it</a>
+          <a href="#concepts">Core ideas</a>
+          <a href="#flows">How it works</a>
+          <a href="#pages">Pages to build</a>
+          <div class="nav-group">Build</div>
+          <a class="now" href="#build-now">Build now (Phase 0)</a>
+          <a href="#build-next">Build next (in order)</a>
+          <a href="#guardrails">Dev guardrails</a>
+          <a href="#scope">In / out of v1</a>
+          <div class="nav-group">Reference</div>
+          <a href="#decisions">Decisions</a>
+          <a href="#questions">Open questions</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="hero" id="vision">
+          <span class="eyebrow">Product &amp; engineering spec</span>
+          <h1>Arcademy</h1>
+          <p class="lead">
+            Arcademy is <strong>onboarding infrastructure</strong> for the Arcium ecosystem. It is not a school platform or a generic course website.
+          </p>
+          <p>
+            Partners turn scattered documentation into a <strong>guided program</strong>: ordered lessons, short understanding checks, and tracked progress. Users get one account, a curated catalog, and proof they actually understood the material—not just that they scrolled past it.
+          </p>
+          <div class="callout">
+            <strong>One sentence:</strong> Arcademy helps ecosystem teams onboard new users and developers with guided programs, comprehension checks, and measurable progress—on shared infrastructure instead of everyone building their own onboarding from scratch.
+          </div>
+          <div class="pill-row">
+            <span class="pill now">First program at launch: Arcium Fundamentals</span>
+            <span class="pill">Single public catalog (one hub)</span>
+            <span class="pill">Staff approves everything that goes live in v1</span>
+          </div>
+        </header>
+
+        <section class="section" id="who">
+          <h2>Who uses Arcademy</h2>
+          <div class="three-col">
+            <article class="card">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                alt="People learning together"
+              />
+              <h3>Learners</h3>
+              <p style="margin-bottom: 8px">New users and developers exploring Arcium ecosystem products.</p>
+              <ul>
+                <li>Browse programs on the hub</li>
+                <li>Read lessons in order</li>
+                <li>Pass short quizzes to confirm understanding</li>
+                <li>One account; progress saved per program</li>
+                <li>Try lesson 1 as a guest, then sign up to keep progress (Phase 1)</li>
+              </ul>
+            </article>
+            <article class="card">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                alt="Team planning"
+              />
+              <h3>Partners</h3>
+              <p style="margin-bottom: 8px">Ecosystem teams (protocols, apps, tools) who need users to get productive—not just read docs.</p>
+              <ul>
+                <li>Submit an intake brief; staff builds the first version</li>
+                <li>Later: edit drafts in Partner Studio after earning trust</li>
+                <li>See where users drop off (Phase 2+)</li>
+                <li>Cannot go live without staff approval in v1</li>
+              </ul>
+            </article>
+            <article class="card">
+              <img
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                alt="Operations team"
+              />
+              <h3>Staff</h3>
+              <p style="margin-bottom: 8px">Arcademy operators who run the hub and onboard partners.</p>
+              <ul>
+                <li>Create organizations and programs</li>
+                <li>Write, review, and publish content</li>
+                <li>Choose what is listed or featured on the hub</li>
+                <li>Grant trusted-partner status after quality review</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="concepts">
+          <h2>Core ideas (plain language)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>What it means for developers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hub</strong></td>
+                <td>Public home and catalog: <code>/</code> and <code>/programs</code>. Only programs staff mark as listed or featured appear here.</td>
+              </tr>
+              <tr>
+                <td><strong>Program</strong></td>
+                <td>One onboarding path (e.g. Arcium Fundamentals). Users enroll in a program; progress is scoped to that program.</td>
+              </tr>
+              <tr>
+                <td><strong>Organization</strong></td>
+                <td>The partner company that owns programs. Used for permissions and keeping each partner’s data separate.</td>
+              </tr>
+              <tr>
+                <td><strong>Lesson</strong></td>
+                <td>A reading-first page built from fixed block types (heading, paragraph, callout, code, image, divider)—not free-form HTML.</td>
+              </tr>
+              <tr>
+                <td><strong>Quiz</strong></td>
+                <td>Optional check at the end of a lesson. Question shapes are defined by the platform. Answer keys stay on the server.</td>
+              </tr>
+              <tr>
+                <td><strong>Draft vs published</strong></td>
+                <td>Authors edit a working draft. Publish creates a <strong>frozen snapshot</strong>. Never edit published snapshots in place.</td>
+              </tr>
+              <tr>
+                <td><strong>Enrollment</strong></td>
+                <td>A user’s membership in one program, pinned to a specific published curriculum version.</td>
+              </tr>
+              <tr>
+                <td><strong>Tenant isolation</strong></td>
+                <td>Partner A cannot read Partner B’s drafts or user progress. Enforced in the database and in application code.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section" id="flows">
+          <h2>How it works</h2>
+
+          <h3>Learner journey</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Learner flow">
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#0891b2" />
+                </marker>
+              </defs>
+              <rect x="8" y="28" width="100" height="44" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+              <rect x="128" y="28" width="100" height="44" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+              <rect x="248" y="28" width="100" height="44" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+              <rect x="368" y="28" width="100" height="44" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+              <rect x="488" y="28" width="100" height="44" rx="8" fill="#dff8ff" stroke="#00b7c7" />
+              <rect x="608" y="28" width="100" height="44" rx="8" fill="#d1fae5" stroke="#059669" />
+              <text x="22" y="55" font-size="13" font-family="sans-serif">Hub</text>
+              <text x="138" y="55" font-size="13" font-family="sans-serif">Program</text>
+              <text x="262" y="55" font-size="13" font-family="sans-serif">Lesson</text>
+              <text x="378" y="55" font-size="13" font-family="sans-serif">Quiz</text>
+              <text x="498" y="55" font-size="13" font-family="sans-serif">Progress</text>
+              <text x="618" y="55" font-size="13" font-family="sans-serif">Done</text>
+              <line x1="108" y1="50" x2="124" y2="50" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="228" y1="50" x2="244" y2="50" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="348" y1="50" x2="364" y2="50" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="468" y1="50" x2="484" y2="50" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="588" y1="50" x2="604" y2="50" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow)" />
+            </svg>
+            <p class="diagram-caption">Discover → open program → read lesson → pass check → progress saved → program complete</p>
+          </div>
+
+          <h3>Content lifecycle (staff / trusted partner)</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Publish flow">
+              <rect x="20" y="40" width="120" height="50" rx="8" fill="#fef3c7" stroke="#d97706" />
+              <rect x="170" y="40" width="120" height="50" rx="8" fill="#fef3c7" stroke="#d97706" />
+              <rect x="320" y="40" width="120" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" />
+              <rect x="470" y="40" width="120" height="50" rx="8" fill="#d1fae5" stroke="#059669" />
+              <rect x="620" y="40" width="80" height="50" rx="8" fill="#e0e7ff" stroke="#4f46e5" />
+              <text x="38" y="70" font-size="12" font-family="sans-serif">Draft</text>
+              <text x="188" y="70" font-size="12" font-family="sans-serif">In review</text>
+              <text x="338" y="70" font-size="12" font-family="sans-serif">Approved</text>
+              <text x="488" y="70" font-size="12" font-family="sans-serif">Publish</text>
+              <text x="628" y="70" font-size="12" font-family="sans-serif">Hub</text>
+              <text x="20" y="110" font-size="11" fill="#64748b" font-family="sans-serif">Editable working copy</text>
+              <text x="470" y="110" font-size="11" fill="#64748b" font-family="sans-serif">Immutable snapshot — learners see this</text>
+              <text x="620" y="110" font-size="11" fill="#64748b" font-family="sans-serif">Listed / featured</text>
+              <path d="M140 65h24M290 65h24M440 65h24M590 65h24" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+            </svg>
+            <p class="diagram-caption">Publishing and hub listing are separate steps. A program can be published but still hidden from the catalog.</p>
+          </div>
+
+          <h3>Data shape (simplified)</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data hierarchy">
+              <rect x="180" y="8" width="160" height="36" rx="6" fill="#e0f2fe" stroke="#0284c7" />
+              <text x="210" y="31" font-size="13" font-family="sans-serif">Organization</text>
+              <rect x="180" y="58" width="160" height="36" rx="6" fill="#cffafe" stroke="#0891b2" />
+              <text x="218" y="81" font-size="13" font-family="sans-serif">Program</text>
+              <rect x="160" y="108" width="200" height="36" rx="6" fill="#ccfbf1" stroke="#0d9488" />
+              <text x="188" y="131" font-size="13" font-family="sans-serif">Curriculum version</text>
+              <rect x="120" y="158" width="120" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" />
+              <text x="148" y="181" font-size="12" font-family="sans-serif">Lessons</text>
+              <rect x="280" y="158" width="120" height="36" rx="6" fill="#f0fdf4" stroke="#16a34a" />
+              <text x="310" y="181" font-size="12" font-family="sans-serif">Quizzes</text>
+              <line x1="260" y1="44" x2="260" y2="58" stroke="#64748b" stroke-width="1.5" />
+              <line x1="260" y1="94" x2="260" y2="108" stroke="#64748b" stroke-width="1.5" />
+              <line x1="220" y1="144" x2="180" y2="158" stroke="#64748b" stroke-width="1.5" />
+              <line x1="300" y1="144" x2="340" y2="158" stroke="#64748b" stroke-width="1.5" />
+            </svg>
+            <p class="diagram-caption">Each partner org owns programs. Published content is versioned; progress points at lesson/quiz versions, not mutable drafts.</p>
+          </div>
+        </section>
+
+        <section class="section" id="pages">
+          <h2>Pages developers build</h2>
+          <p>Build in phase order. Do not ship public learner pages before the database foundation and isolation tests are done.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Who</th>
+                <th>Purpose</th>
+                <th>Phase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/</code></td>
+                <td>Everyone</td>
+                <td>Hub home — featured programs, continue learning</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><code>/programs</code></td>
+                <td>Everyone</td>
+                <td>Full catalog (listed / featured only)</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><code>/programs/[slug]</code></td>
+                <td>Everyone</td>
+                <td>Program overview, enroll or continue</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><code>/programs/[slug]/lessons/[lesson]</code></td>
+                <td>Everyone</td>
+                <td>Lesson reader + quiz</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><code>/account</code></td>
+                <td>Signed-in users</td>
+                <td>Enrollments and progress across programs</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><code>/staff/*</code></td>
+                <td>Staff</td>
+                <td>Authoring, publish, hub curation, intake</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td><code>/partner/*</code></td>
+                <td>Trusted partners</td>
+                <td>Draft editing and submit for review (no self-publish)</td>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top: 12px; font-size: 0.9rem; color: var(--muted)">
+            Old <code>/modules/*</code> URLs should redirect to <code>/programs/arcium/*</code> for bookmarks and search engines (Phase 0).
+          </p>
+        </section>
+
+        <section class="section" id="build-now">
+          <h2>Build now — Phase 0 (foundation)</h2>
+          <p>
+            <span class="pill now">Do this first</span>
+            Phase 0 has <strong>no public hub UI</strong>. Goal: multi-tenant database, isolation, Arcium content seeded, and all reads/writes through scoped repositories.
+          </p>
+
+          <div class="phase-block phase-0">
+            <div class="phase-head">
+              <h3>Milestone 1–3 · Multi-tenant core, migration, verification</h3>
+              <span class="when">~5 weeks · Backend-heavy</span>
+            </div>
+            <div class="phase-body">
+              <ul class="task-list">
+                <li>
+                  <span class="task-id">ARC-5</span>
+                  <span><strong>Tenancy schema</strong> — organizations, programs, curriculum versions, lessons, quizzes, enrollments, progress tables. Run via <code>npm run db:migrate</code>.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-6</span>
+                  <span><strong>Row-level security</strong> — database policies so partners cannot see each other’s data. Session variables set per request.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-8</span>
+                  <span><strong>Tenant context + repositories</strong> — <code>resolveTenantContext()</code>; no raw database queries in route handlers.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-7</span>
+                  <span><strong>Connection spike</strong> — confirm Neon unpooled connections work with row-level security (documented in agent platform doc).</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-9</span>
+                  <span><strong>Program-scoped content layer</strong> — refactor reads to use program + version, not legacy module paths.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-10</span>
+                  <span><strong>Migrate Arcium</strong> — first program <code>arcium</code> with curriculum version 1 and lesson snapshots.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-11</span>
+                  <span><strong>Pin existing learners</strong> — backfill enrollments and progress with version foreign keys.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-12</span>
+                  <span><strong>Legacy redirects</strong> — <code>/modules/*</code> → <code>/programs/arcium/*</code>.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-13</span>
+                  <span><strong>Lesson block schema v1</strong> — validate and render structured blocks only.</span>
+                </li>
+                <li>
+                  <span class="task-id">ARC-14</span>
+                  <span><strong>Cross-tenant tests</strong> — user A must get 403/404 for partner B data, never an empty 200.</span>
+                </li>
+              </ul>
+              <div class="exit">
+                <strong>Phase 0 exit:</strong> Arcium content is readable through repositories; isolation tests pass. Learner-facing hub pages start in Phase 1.
+              </div>
+            </div>
+          </div>
+
+          <div class="do-not">
+            <h4>Do not in Phase 0</h4>
+            <ul>
+              <li>Ship <code>/programs</code> public UI before repositories and row-level security work</li>
+              <li>Build staff authoring UI (use seed scripts; UI comes Phase 2)</li>
+              <li>Let partners publish to production without staff</li>
+              <li>Update published lesson rows in place</li>
+              <li>Send quiz answer keys to the browser</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section" id="build-next">
+          <h2>Build next — in chronological order</h2>
+          <p>After Phase 0 passes its exit criteria, work through these phases in order. Do not skip ahead.</p>
+
+          <div class="phase-block phase-1">
+            <div class="phase-head">
+              <h3>Phase 1 · Hub and learner loop</h3>
+              <span class="when">M4–M5 · ~4 weeks</span>
+            </div>
+            <div class="phase-body">
+              <p>First user-visible Arcademy experience. Arcium appears on the hub.</p>
+              <ul class="task-list">
+                <li><span class="task-id">ARC-15–18</span><span>Hub home, program catalog, program page, lesson player</span></li>
+                <li><span class="task-id">ARC-20</span><span>Guest can try lesson 1; progress stored locally until signup</span></li>
+                <li><span class="task-id">ARC-19</span><span>Global account enrollments (decide: enroll button vs first activity)</span></li>
+                <li><span class="task-id">ARC-21</span><span>Merge guest progress when user creates account</span></li>
+                <li><span class="task-id">ARC-22</span><span>Platform events (enrolled, lesson started/completed, quiz passed) in same transaction as progress writes</span></li>
+                <li><span class="task-id">ARC-23</span><span>Staff UI to set listed / featured / sunset on hub</span></li>
+              </ul>
+              <div class="exit"><strong>Exit:</strong> Visitor completes Arcium lesson 1 as guest, signs up, progress is kept. Hub shows Arcium.</div>
+            </div>
+          </div>
+
+          <div class="phase-block phase-2">
+            <div class="phase-head">
+              <h3>Phase 2 · Staff authoring and second program</h3>
+              <span class="when">M6–M7 (part 1) · ~4 weeks</span>
+            </div>
+            <div class="phase-body">
+              <ul class="task-list">
+                <li><span class="task-id">ARC-26</span><span>Draft → review → approved → published state machine</span></li>
+                <li><span class="task-id">ARC-25</span><span>Staff Studio scoped by organization and program</span></li>
+                <li><span class="task-id">ARC-27</span><span>Publish and rollback UI (new immutable version each publish)</span></li>
+                <li><span class="task-id">ARC-24</span><span>Partner intake form → staff queue → create org/program</span></li>
+                <li><span class="task-id">ARC-28</span><span>Signed preview links for draft curriculum</span></li>
+                <li><span class="task-id">ARC-29–30</span><span>Nightly analytics rollups + staff funnel dashboard</span></li>
+                <li><span class="task-id">ARC-31</span><span>Second program built end-to-end by staff (first non-Arcium pilot)</span></li>
+              </ul>
+              <div class="exit"><strong>Exit:</strong> A second partner program is live on the hub, built entirely through staff tools.</div>
+            </div>
+          </div>
+
+          <div class="phase-block phase-3">
+            <div class="phase-head">
+              <h3>Phase 3 · Trusted partners</h3>
+              <span class="when">M7 (part 2) · ~2 weeks</span>
+            </div>
+            <div class="phase-body">
+              <ul class="task-list">
+                <li><span class="task-id">ARC-34</span><span>Staff sets organization trust level after QA</span></li>
+                <li><span class="task-id">ARC-32</span><span>Partner Studio — draft only, submit for review</span></li>
+                <li><span class="task-id">ARC-33</span><span>Staff approval queue</span></li>
+                <li><span class="task-id">ARC-35–36</span><span>Partner read-only analytics; gamification preset toggles (minimal vs standard)</span></li>
+                <li><span class="task-id">ARC-37</span><span>Trusted partner pilot — partner submits draft, staff publishes</span></li>
+              </ul>
+              <div class="exit"><strong>Exit:</strong> Trusted partner ships a curriculum update without staff rewriting from scratch.</div>
+            </div>
+          </div>
+
+          <div class="phase-block phase-4">
+            <div class="phase-head">
+              <h3>Phase 4 · Later (post–v1)</h3>
+              <span class="when">Deferred issues ARC-38–44</span>
+            </div>
+            <div class="phase-body">
+              <p>Not required for first public launch. Planned when product and legal gates clear:</p>
+              <ul>
+                <li>Signed completion records partners can verify</li>
+                <li>Webhooks for partner apps</li>
+                <li>Sign-in through partner apps</li>
+                <li>Embeddable widget</li>
+                <li>More lesson block types</li>
+                <li>Automated enrollment migration between curriculum versions</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 24px">Timeline overview</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Phase timeline">
+              <rect x="10" y="50" width="150" height="56" rx="6" fill="#d1fae5" stroke="#059669" />
+              <rect x="180" y="50" width="150" height="56" rx="6" fill="#dbeafe" stroke="#2563eb" />
+              <rect x="350" y="50" width="150" height="56" rx="6" fill="#f3f4f6" stroke="#9ca3af" />
+              <rect x="520" y="50" width="170" height="56" rx="6" fill="#faf5ff" stroke="#a78bfa" />
+              <text x="28" y="72" font-size="12" font-weight="bold" font-family="sans-serif">Phase 0</text>
+              <text x="28" y="90" font-size="11" font-family="sans-serif">Foundation</text>
+              <text x="198" y="72" font-size="12" font-weight="bold" font-family="sans-serif">Phase 1</text>
+              <text x="198" y="90" font-size="11" font-family="sans-serif">Hub + learners</text>
+              <text x="368" y="72" font-size="12" font-weight="bold" font-family="sans-serif">Phase 2–3</text>
+              <text x="368" y="90" font-size="11" font-family="sans-serif">Staff + partners</text>
+              <text x="538" y="72" font-size="12" font-weight="bold" font-family="sans-serif">Phase 4+</text>
+              <text x="538" y="90" font-size="11" font-family="sans-serif">Integrations</text>
+              <text x="10" y="30" font-size="11" fill="#64748b" font-family="sans-serif">Now</text>
+              <text x="350" y="30" font-size="11" fill="#64748b" font-family="sans-serif">Next</text>
+              <text x="520" y="30" font-size="11" fill="#64748b" font-family="sans-serif">Later</text>
+              <line x1="160" y1="78" x2="178" y2="78" stroke="#64748b" stroke-width="2" />
+              <line x1="330" y1="78" x2="348" y2="78" stroke="#64748b" stroke-width="2" />
+              <line x1="500" y1="78" x2="518" y2="78" stroke="#64748b" stroke-width="2" />
+            </svg>
+            <p class="diagram-caption">Rough calendar for v1 with 1–2 engineers: about 12–16 weeks to first full launch</p>
+          </div>
+        </section>
+
+        <section class="section" id="guardrails">
+          <h2>Dev guardrails</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>All server data access goes through <code>resolveTenantContext()</code> and repositories</td>
+                <td>Consistent permissions; easier audits</td>
+              </tr>
+              <tr>
+                <td>Publish = copy draft into new version rows</td>
+                <td>Learners always see stable content; progress stays valid</td>
+              </tr>
+              <tr>
+                <td>Quiz scoring only on server</td>
+                <td>Prevents cheating; answer keys never in client bundles</td>
+              </tr>
+              <tr>
+                <td>Lessons use block schema (Zod), not author HTML</td>
+                <td>Safer rendering; consistent UX</td>
+              </tr>
+              <tr>
+                <td>Content lives in Postgres at runtime</td>
+                <td>No parallel “lessons in git” source of truth</td>
+              </tr>
+              <tr>
+                <td>Every migration hits production database</td>
+                <td>Preview/dev/prod share DB until infra splits—migrate carefully</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 14px">
+            Stack: Next.js 16, React 19, TypeScript, Tailwind, PostgreSQL (Neon), better-auth, Zod, Cloudinary for images, Vercel hosting.
+          </p>
+        </section>
+
+        <section class="section" id="scope">
+          <h2>In v1 / not in v1</h2>
+          <div class="three-col">
+            <article class="card" style="border-color: #bbf7d0">
+              <h3 style="color: #166534">In v1</h3>
+              <ul>
+                <li>Hub and program catalog</li>
+                <li>Lesson player with platform quizzes</li>
+                <li>One global Arcademy account</li>
+                <li>Staff-built partner programs</li>
+                <li>Arcium as first program</li>
+                <li>Guest try → sign up → keep progress</li>
+                <li>Staff analytics on drop-off</li>
+              </ul>
+            </article>
+            <article class="card" style="border-color: #fecaca">
+              <h3 style="color: #991b1b">Not in v1</h3>
+              <ul>
+                <li>Generic school / classroom features</li>
+                <li>Custom quiz question types</li>
+                <li>Public leaderboards, streaks, points</li>
+                <li>Partner self-publish without staff</li>
+                <li>Embeds in partner apps</li>
+                <li>Sign-in through partner apps</li>
+                <li>Billing and webhooks</li>
+              </ul>
+            </article>
+            <article class="card" style="border-color: #c4b5fd">
+              <h3 style="color: #5b21b6">Future direction</h3>
+              <ul>
+                <li>Signed completion records</li>
+                <li>Named credentials (“finished Arcium Fundamentals”)</li>
+                <li>Exportable progress history</li>
+                <li>Not a token-rewards game—proof of learning matters</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="decisions">
+          <h2>Decisions already made</h2>
+          <ul>
+            <li>Product category: onboarding infrastructure, not an education platform</li>
+            <li>Single public hub (not separate sites per partner)</li>
+            <li>Arcium is program #1 at launch (<code>arcium</code> slug)</li>
+            <li>Staff must approve all publishes in v1</li>
+            <li>Published snapshots are immutable</li>
+            <li>English-only UI for v1</li>
+            <li>Fewer than ~10 partner programs expected in year one</li>
+          </ul>
+        </section>
+
+        <section class="section" id="questions">
+          <h2>Open questions</h2>
+          <p>Resolve before building the affected phase:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Needed before</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Which partner app is the first non-Arcium pilot?</td>
+                <td>Phase 2</td>
+              </tr>
+              <tr>
+                <td>Does enrollment happen on “Enroll” click or first lesson activity?</td>
+                <td>Phase 1</td>
+              </tr>
+              <tr>
+                <td>How long should partner preview links stay valid?</td>
+                <td>Phase 2</td>
+              </tr>
+              <tr>
+                <td>Legal terms for sharing learner progress with partners</td>
+                <td>Phase 2</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top: 16px; font-size: 0.9rem; color: var(--muted)">
+            Engineering detail: <code>docs/AGENT-PLATFORM.md</code> · Full design: <code>docs/superpowers/specs/2026-05-20-ecosystem-platform-design.md</code> ·
+            Linear project: Arcidex Ecosystem Delivery Plan
+          </p>
+        </section>
+      </main>
+    </div>
+    <footer>
+      Arcademy product &amp; build spec — synced to arcademy-docs on push to main via .github/workflows/sync-docs.yml
+    </footer>
+  </body>
+</html>
