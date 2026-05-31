@@ -132,7 +132,7 @@ A program appears on the public hub only when **all** are true: `hub_status` is 
 | `/programs/[programSlug]` | 1 | Program home: path, enroll/continue CTA |
 | `/programs/[programSlug]/lessons/[lessonSlug]` | 1 | Lesson player |
 | `/account` | 1 | Global learner: enrollments, per-program progress |
-| `/staff/*` | 2 | Staff Studio (org/program scoped authoring + publish) |
+| `/staff/*` | 2 | Staff Studio (org/program scoped authoring + publish). **Slices A–C shipped:** program shell, curriculum outline (add/reorder/edit/delete lessons), lesson block editor + quiz + preview — see `docs/superpowers/specs/2026-05-28-staff-program-shell-design.md`, `2026-05-29-staff-curriculum-outline-design.md`, `2026-05-29-staff-lesson-editor-design.md`. |
 | `/partner/*` | 3 | Partner Studio (trusted orgs, draft + submit for review) |
 
 There is no `/modules` route. Optional redirects from a prior product belong in edge config or `middleware.ts` — not in core routing design.
@@ -289,7 +289,7 @@ Trust gate is **manual**: staff sets `organization.trust_level = self_serve_draf
 | # | Question | Phase |
 | --- | --- | --- |
 | 1 | First non-Arcium pilot partner — which app? | 2 |
-| 2 | Enroll on explicit action vs first activity? | 1 |
+| 2 | Enroll on **explicit Enroll button** on program home (not first activity). Pins `active_published_version_id` at enroll time. | 1 |
 | 3 | Partner preview tokens: TTL and auth? | 2 |
 | 4 | ~~Neon pooler vs unpooled for RLS session vars?~~ **Resolved:** use `DATABASE_URL_UNPOOLED` for migrations, seeds, and all `withTenantTransaction()` calls; pooled URL reserved for future read-only paths. | 0 |
 | 6 | Legal: partner terms for user progress data sharing? | 2 |

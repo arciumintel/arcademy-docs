@@ -203,7 +203,7 @@ These are settled unless leadership explicitly reopens them:
 | Question | When we need an answer |
 | --- | --- |
 | Which partner app is the first non-Arcium pilot? | Before Phase 2 |
-| Does enrollment happen on “Enroll” click or first lesson activity? | Before Phase 1 |
+| Does enrollment happen on “Enroll” click or first lesson activity? | **Resolved:** explicit **Enroll** on program home; guest may preview lesson 1 without enrolling. |
 | How long should partner preview links last? | Before Phase 2 |
 | Legal terms for sharing learner progress with partners | Before Phase 2 |
 
