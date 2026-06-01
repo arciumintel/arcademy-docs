@@ -6,6 +6,7 @@
     <title>Arcademy Product Overview</title>
     <style>
       :root {
+        --docs-topnav-h: 48px;
         --bg: #eef2f7;
         --panel: #ffffff;
         --text: #0f172a;
@@ -39,8 +40,8 @@
 
       .sidebar {
         position: sticky;
-        top: 0;
-        height: 100vh;
+        top: var(--docs-topnav-h);
+        height: calc(100vh - var(--docs-topnav-h));
         background: #e8edf4;
         border-right: 1px solid var(--line);
         padding: 20px 14px;
@@ -257,7 +258,7 @@
 
       .toc {
         position: sticky;
-        top: 14px;
+        top: calc(var(--docs-topnav-h) + 14px);
         height: fit-content;
         font-size: 0.86rem;
         color: #475569;
@@ -304,14 +305,84 @@
           display: none;
         }
 
-        .content {
-          border: 1px solid var(--line);
-          border-radius: 8px;
+        h1 {
+          font-size: 2rem;
+        }
+      }
+
+      .docs-topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: var(--docs-topnav-h);
+        padding: 0 20px;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-bottom: 1px solid #1e293b;
+      }
+
+      .docs-topnav-brand {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      .docs-topnav-brand:hover {
+        color: var(--brand);
+      }
+
+      .docs-topnav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .docs-topnav-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.88rem;
+      }
+
+      .docs-topnav-links a:hover {
+        color: #fff;
+        background: #1e293b;
+      }
+
+      .docs-topnav-links a.active {
+        color: #fff;
+        background: var(--brand-dark);
+      }
+
+      @media (max-width: 640px) {
+        .docs-topnav {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 16px;
+        }
+
+        .docs-topnav-links {
+          width: 100%;
         }
       }
     </style>
   </head>
   <body>
+    <nav class="docs-topnav" aria-label="Arcademy documentation">
+      <a class="docs-topnav-brand" href="index.html">Arcademy Docs</a>
+      <div class="docs-topnav-links">
+        <a href="arcademy-product-overview.html" class="active">Overview</a>
+        <a href="index.html">Build Spec</a>
+        <a href="arcademy-twitter-staff-guide.html">Twitter Guide</a>
+      </div>
+    </nav>
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">Arcademy</div>

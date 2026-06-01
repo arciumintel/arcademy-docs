@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcademy — Twitter Staff Guide</title>
+    <style>
+      :root {
+        --docs-topnav-h: 48px;
+        --bg: #eef2f7;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --line: #d6deea;
+        --brand: #00b7c7;
+        --brand-dark: #0e7490;
+        --ok: #0f766e;
+        --warn: #b45309;
+        --bad: #b91c1c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .layout {
+        max-width: 1380px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 240px 1fr 210px;
+        gap: 24px;
+        padding: 0 20px 24px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: var(--docs-topnav-h);
+        height: calc(100vh - var(--docs-topnav-h));
+        overflow-y: auto;
+        background: #e8edf4;
+        border-right: 1px solid var(--line);
+        padding: 20px 14px 32px;
+      }
+
+      .brand {
+        font-size: 1.28rem;
+        font-weight: 700;
+      }
+
+      .tag {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.84rem;
+        letter-spacing: 0.02em;
+      }
+
+      .nav {
+        margin-top: 18px;
+        display: grid;
+        gap: 5px;
+      }
+
+      .nav-group {
+        margin-top: 14px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        font-weight: 600;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #0f172a;
+        border: 1px solid transparent;
+        padding: 7px 10px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      .nav a:hover {
+        border-color: var(--brand);
+        background: #f6fbff;
+      }
+
+      .content {
+        background: var(--panel);
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        min-height: 100vh;
+        padding: 20px 28px 36px;
+      }
+
+      .hero {
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 8px;
+        padding: 8px 0 20px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 10px;
+        line-height: 1.2;
+      }
+
+      h1 {
+        font-size: 2.6rem;
+        font-weight: 700;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        margin-top: 4px;
+      }
+
+      h3 {
+        font-size: 1.12rem;
+      }
+
+      p {
+        margin: 0 0 12px;
+        color: #293548;
+        max-width: 72ch;
+      }
+
+      .lead {
+        font-size: 1.08rem;
+        max-width: 68ch;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #475569;
+        border: 1px solid #cfd8e6;
+        border-radius: 4px;
+        padding: 4px 8px;
+        margin-bottom: 12px;
+      }
+
+      .section {
+        border-bottom: 1px solid var(--line);
+        padding: 22px 0;
+      }
+
+      .callout {
+        border-left: 4px solid var(--brand);
+        padding: 12px 14px;
+        background: #eefcff;
+        border-radius: 6px;
+        margin: 14px 0;
+        max-width: 72ch;
+      }
+
+      .callout.warn {
+        border-left-color: var(--warn);
+        background: #fffbeb;
+      }
+
+      .callout.bad {
+        border-left-color: var(--bad);
+        background: #fef2f2;
+      }
+
+      .callout.ok {
+        border-left-color: var(--ok);
+        background: #ecfdf5;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 12px;
+        padding-left: 22px;
+        max-width: 72ch;
+        color: #293548;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: #fbfdff;
+      }
+
+      .card h3 {
+        margin-bottom: 8px;
+      }
+
+      .tweet {
+        border: 1px solid #c7d7ea;
+        border-left: 4px solid var(--brand-dark);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 10px 0;
+        background: #f8fbff;
+        font-size: 0.95rem;
+        max-width: 72ch;
+      }
+
+      .tweet .label {
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+
+      .tweet p {
+        margin: 0;
+        max-width: none;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 0.93rem;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef4fd;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #314159;
+      }
+
+      .check {
+        color: var(--ok);
+        font-weight: 700;
+      }
+
+      .x {
+        color: var(--bad);
+        font-weight: 700;
+      }
+
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+        max-width: 72ch;
+      }
+
+      .flow span {
+        background: #dff8ff;
+        border: 1px solid #9fe8ef;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 0.88rem;
+      }
+
+      .flow .arrow {
+        background: transparent;
+        border: none;
+        padding: 6px 0;
+        color: var(--brand-dark);
+        font-weight: 700;
+      }
+
+      .cheatsheet {
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 10px;
+        padding: 18px 20px;
+        margin-top: 14px;
+        max-width: 72ch;
+      }
+
+      .cheatsheet h3 {
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      .cheatsheet p,
+      .cheatsheet li {
+        color: #cbd5e1;
+      }
+
+      .note {
+        font-size: 0.92rem;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+
+      footer {
+        text-align: center;
+        color: #6b7280;
+        padding: 14px 0 24px;
+        font-size: 0.82rem;
+      }
+
+      .toc {
+        position: sticky;
+        top: calc(var(--docs-topnav-h) + 14px);
+        height: fit-content;
+        font-size: 0.86rem;
+        color: #475569;
+        padding-top: 14px;
+      }
+
+      .toc h4 {
+        margin: 0 0 10px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #334155;
+      }
+
+      .toc a {
+        display: block;
+        text-decoration: none;
+        color: #475569;
+        padding: 4px 0;
+      }
+
+      .toc a:hover {
+        color: #0f172a;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+          padding: 14px;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: 1px solid var(--line);
+          border-radius: 8px;
+        }
+
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          display: none;
+        }
+
+        .content {
+          border: 1px solid var(--line);
+          border-radius: 8px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+
+      .docs-topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: var(--docs-topnav-h);
+        padding: 0 20px;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-bottom: 1px solid #1e293b;
+      }
+
+      .docs-topnav-brand {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      .docs-topnav-brand:hover {
+        color: var(--brand);
+      }
+
+      .docs-topnav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .docs-topnav-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.88rem;
+      }
+
+      .docs-topnav-links a:hover {
+        color: #fff;
+        background: #1e293b;
+      }
+
+      .docs-topnav-links a.active {
+        color: #fff;
+        background: var(--brand-dark);
+      }
+
+      @media (max-width: 640px) {
+        .docs-topnav {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px 16px;
+        }
+
+        .docs-topnav-links {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="docs-topnav" aria-label="Arcademy documentation">
+      <a class="docs-topnav-brand" href="index.html">Arcademy Docs</a>
+      <div class="docs-topnav-links">
+        <a href="arcademy-product-overview.html">Overview</a>
+        <a href="index.html">Build Spec</a>
+        <a href="arcademy-twitter-staff-guide.html" class="active">Twitter Guide</a>
+      </div>
+    </nav>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">Arcademy</div>
+        <div class="tag">Twitter Staff Guide</div>
+        <nav class="nav">
+          <div class="nav-group">Start here</div>
+          <a href="#welcome">Welcome</a>
+          <a href="#pitch">The Pitch</a>
+          <a href="#not">What We Are Not</a>
+          <a href="#glossary">Simple Glossary</a>
+          <div class="nav-group">The product</div>
+          <a href="#website">Website Walkthrough</a>
+          <a href="#audience">Who We Talk To</a>
+          <a href="#voice">Brand Voice</a>
+          <div class="nav-group">Twitter work</div>
+          <a href="#strategy">Growth Strategy</a>
+          <a href="#ideas">Tweet Ideas</a>
+          <a href="#calendar">Content Calendar</a>
+          <a href="#rules">Do's &amp; Don'ts</a>
+          <a href="#cheatsheet">Cheat Sheet</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="hero" id="welcome">
+          <span class="eyebrow">Internal · Social media</span>
+          <h1>Twitter Guide for Arcademy</h1>
+          <p class="lead">
+            This guide explains what Arcademy is, how the website works, and how to grow our Twitter presence — written in plain language.
+          </p>
+          <div class="callout ok">
+            <strong>Your job in one sentence:</strong> Help people understand that Arcademy turns confusing product docs into a clear, step-by-step path — and that finishing a program actually means they understood it, not just clicked through.
+          </div>
+          <p class="note">Last updated: May 2026 · Questions? Ask the team before posting anything you're unsure about.</p>
+        </section>
+
+        <section class="section" id="pitch">
+          <h2>The Pitch (Plain English)</h2>
+          <p>
+            <strong>Arcademy</strong> is a website that helps people get ready to use products in the <strong>Arcium</strong> ecosystem. Think of it like a friendly onboarding guide — not a school, not a course marketplace, and not a hype machine.
+          </p>
+          <p>
+            Today, when someone wants to learn a new crypto or developer product, they usually get a long, scattered documentation page. They scroll, get lost, and never know if they actually understood anything. Arcademy fixes that by offering <strong>guided programs</strong>: read a lesson, take a short check at the end, move to the next step. Progress is saved. Completion means something.
+          </p>
+
+          <div class="callout">
+            <strong>Memorize this line:</strong> Arcademy is onboarding infrastructure — guided programs with comprehension checks and measurable progress for the Arcium ecosystem.
+          </div>
+
+          <h3>The problem we solve</h3>
+          <ul>
+            <li>Docs are hard to follow when you're new.</li>
+            <li>People drop off and never come back.</li>
+            <li>Teams can't tell who actually understood the product vs. who just skimmed.</li>
+            <li>Support gets flooded with basic questions that good onboarding would prevent.</li>
+          </ul>
+
+          <h3>What we offer instead</h3>
+          <ul>
+            <li>One place (the <strong>hub</strong>) to discover onboarding programs.</li>
+            <li>Clear lesson-by-lesson paths with short quizzes to confirm understanding.</li>
+            <li>One account so users can pick up where they left off.</li>
+            <li>For partner teams: a governed way to turn their docs into structured programs without building their own system.</li>
+          </ul>
+
+          <h3>Launch focus</h3>
+          <p>
+            The first program live on Arcademy is <strong>Arcium Fundamentals</strong> — the starting path for anyone new to the Arcium ecosystem. Many early tweets can point people there.
+          </p>
+        </section>
+
+        <section class="section" id="not">
+          <h2>What Arcademy Is <em>Not</em></h2>
+          <p>Getting this wrong on Twitter hurts trust. Avoid these frames:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Don't say</th>
+                <th>Why</th>
+                <th>Say instead</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>"Online school" / "LMS" / "take our courses"</td>
+                <td>We're infrastructure for onboarding, not a generic education platform.</td>
+                <td>"Guided onboarding programs" or "structured path to get started"</td>
+              </tr>
+              <tr>
+                <td>"Earn XP" / "level up" / "streaks" / "leaderboards"</td>
+                <td>We deliberately avoid gamification theater.</td>
+                <td>"Track your progress" / "pick up where you left off"</td>
+              </tr>
+              <tr>
+                <td>"Get rewarded with tokens" / "NFT badge"</td>
+                <td>Not our model at launch. Future credentials are about proof of completion, not hype.</td>
+                <td>"Verified completion" / "you finished the fundamentals"</td>
+              </tr>
+              <tr>
+                <td>"Revolutionary AI platform"</td>
+                <td>Overpromising and buzzwords hurt our calm, credible brand.</td>
+                <td>Specific, honest benefits (clarity, progress, readiness)</td>
+              </tr>
+              <tr>
+                <td>"Classroom" / "instructor" / "students enroll in classes"</td>
+                <td>Wrong mental model.</td>
+                <td>"Program" / "lesson" / "enroll in a program"</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section" id="glossary">
+          <h2>Simple Glossary</h2>
+          <p>Use these words consistently in tweets and replies:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Word</th>
+                <th>What it means (simple)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hub</strong></td>
+                <td>The Arcademy home page — where people browse and discover programs.</td>
+              </tr>
+              <tr>
+                <td><strong>Program</strong></td>
+                <td>A full onboarding path for one product (e.g. Arcium Fundamentals). This is what people "join."</td>
+              </tr>
+              <tr>
+                <td><strong>Lesson</strong></td>
+                <td>One reading page in a program. Usually ends with a short quiz.</td>
+              </tr>
+              <tr>
+                <td><strong>Track</strong></td>
+                <td>A group of lessons — like a chapter in a book.</td>
+              </tr>
+              <tr>
+                <td><strong>Quiz</strong></td>
+                <td>A short comprehension check — not a scary exam. Confirms they got the key ideas.</td>
+              </tr>
+              <tr>
+                <td><strong>Enroll</strong></td>
+                <td>When a user officially joins a program so their progress is tracked.</td>
+              </tr>
+              <tr>
+                <td><strong>Partner</strong></td>
+                <td>An ecosystem team (a product or protocol) that uses Arcademy to onboard their users.</td>
+              </tr>
+              <tr>
+                <td><strong>Arcium</strong></td>
+                <td>The ecosystem Arcademy serves first. Arcium Fundamentals is program #1.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section" id="website">
+          <h2>Website Walkthrough</h2>
+          <p>
+            You don't need to explain code or backend systems. You <em>do</em> need to know what a visitor sees and what story to tell. Here's the site in order:
+          </p>
+
+          <article class="card" style="margin-bottom: 14px">
+            <h3>1. Home — the Hub (<code>/</code>)</h3>
+            <p style="margin-bottom: 8px">
+              The front door. Featured programs, a catalog feel, and (for signed-in users) "continue where you left off."
+            </p>
+            <p><strong>Tweet angle:</strong> "One home for getting started in the ecosystem — no doc maze."</p>
+          </article>
+
+          <article class="card" style="margin-bottom: 14px">
+            <h3>2. Programs catalog (<code>/programs</code>)</h3>
+            <p style="margin-bottom: 8px">Full list of available onboarding programs. Clean browsing — not a chaotic link dump.</p>
+            <p><strong>Tweet angle:</strong> "Browse structured paths, not scattered wiki pages."</p>
+          </article>
+
+          <article class="card" style="margin-bottom: 14px">
+            <h3>3. Program page (<code>/programs/[name]</code>)</h3>
+            <p style="margin-bottom: 8px">
+              Overview of one program: what it covers, who it's for, and a button to enroll or continue. This is where someone commits to the path.
+            </p>
+            <p><strong>Tweet angle:</strong> "See the full path before you start — then enroll in one click."</p>
+          </article>
+
+          <article class="card" style="margin-bottom: 14px">
+            <h3>4. Lesson reader (<code>/programs/.../lessons/...</code>)</h3>
+            <p style="margin-bottom: 8px">
+              The core experience: readable content (headings, paragraphs, callouts, images) plus a quiz at the end. Calm, focused, no distractions — like good documentation should feel.
+            </p>
+            <p><strong>Tweet angle:</strong> "Read → check your understanding → next lesson. Simple."</p>
+          </article>
+
+          <article class="card" style="margin-bottom: 14px">
+            <h3>5. Account (<code>/account</code>)</h3>
+            <p style="margin-bottom: 8px">Shows enrollments and progress across programs. One login, everything in one place.</p>
+            <p><strong>Tweet angle:</strong> "Your progress follows you — come back anytime."</p>
+          </article>
+
+          <h3>User journey (for thread tweets)</h3>
+          <div class="flow">
+            <span>Land on hub</span>
+            <span class="arrow">→</span>
+            <span>Pick a program</span>
+            <span class="arrow">→</span>
+            <span>Try lesson 1 (guest OK)</span>
+            <span class="arrow">→</span>
+            <span>Sign up to save</span>
+            <span class="arrow">→</span>
+            <span>Complete lessons + quizzes</span>
+            <span class="arrow">→</span>
+            <span>Ready to go deeper</span>
+          </div>
+
+          <div class="callout warn">
+            <strong>Guest try:</strong> New visitors can try the first lesson without an account. Signing up saves their progress. That's a great hook for tweets — low friction, no commitment upfront.
+          </div>
+        </section>
+
+        <section class="section" id="audience">
+          <h2>Who We're Talking To on Twitter</h2>
+          <div class="two-col">
+            <div class="card">
+              <h3>Primary: New users &amp; developers</h3>
+              <ul>
+                <li>Curious about Arcium but overwhelmed by docs.</li>
+                <li>Developers who want to build or integrate but need fundamentals first.</li>
+                <li>People who tried before, got lost, and bounced.</li>
+              </ul>
+              <p><strong>What they care about:</strong> Clarity, saving progress, not wasting time, feeling ready.</p>
+            </div>
+            <div class="card">
+              <h3>Secondary: Partner teams</h3>
+              <ul>
+                <li>Ecosystem products that need better onboarding.</li>
+                <li>Teams tired of support tickets for basic questions.</li>
+                <li>Leads who want measurable activation, not vanity metrics.</li>
+              </ul>
+              <p><strong>What they care about:</strong> Drop-off data, standardized paths, quality control.</p>
+            </div>
+          </div>
+          <p class="note">Early Twitter growth will mostly come from the first group. Partner-facing posts can come later or live on a separate account if the team decides.</p>
+        </section>
+
+        <section class="section" id="voice">
+          <h2>Brand Voice on Twitter</h2>
+          <p>Arcademy should feel <strong>calm, credible, and educational</strong> — like a helpful guide, not a hype account.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <h3 class="check">Do sound like</h3>
+              <ul>
+                <li>Clear and specific</li>
+                <li>Warm but professional</li>
+                <li>Confident without shouting</li>
+                <li>Helpful — you're solving a real problem</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 class="x">Don't sound like</h3>
+              <ul>
+                <li>"🚀🚀🚀 LFG TO THE MOON"</li>
+                <li>Vague AI buzzwords</li>
+                <li>Condescending "you're doing it wrong"</li>
+                <li>Fake urgency ("LAST CHANCE!!!")</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Formatting tips</h3>
+          <ul>
+            <li>Short sentences. One idea per tweet when possible.</li>
+            <li>Use line breaks for readability (especially in threads).</li>
+            <li>One link per tweet — usually to the hub or a program page.</li>
+            <li>Emojis: sparingly. Zero is fine. One relevant emoji max if it fits the tone.</li>
+            <li>Threads beat walls of text. 3–7 tweets is a sweet spot for explainers.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="strategy">
+          <h2>Twitter Growth Strategy</h2>
+          <p>Growing a profile is a marathon. These tactics work for a product like Arcademy — educational, niche, trust-based.</p>
+
+          <h3>Foundation (week 1–2)</h3>
+          <ol>
+            <li><strong>Profile setup:</strong> Clear bio (what Arcademy is + link to site). Same name everywhere: Arcademy. Banner: clean, readable, on-brand — ask design for assets.</li>
+            <li><strong>Pinned tweet:</strong> Best explainer thread or a single tweet with the clearest value prop + link.</li>
+            <li><strong>Pin a second tweet</strong> (if using Notes/long-form): FAQ or "Start here: Arcium Fundamentals."</li>
+          </ol>
+
+          <h3>Content mix (ongoing)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Share of posts</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Educational / problem-aware</td>
+                <td>~40%</td>
+                <td>Build trust — talk about onboarding pain without always selling</td>
+              </tr>
+              <tr>
+                <td>Product &amp; feature highlights</td>
+                <td>~25%</td>
+                <td>Show what Arcademy does with concrete examples</td>
+              </tr>
+              <tr>
+                <td>Social proof &amp; milestones</td>
+                <td>~15%</td>
+                <td>Launches, completions, partner news (when approved)</td>
+              </tr>
+              <tr>
+                <td>Engagement (replies, quotes, polls)</td>
+                <td>~15%</td>
+                <td>Be visible in ecosystem conversations</td>
+              </tr>
+              <tr>
+                <td>Building in public / behind the scenes</td>
+                <td>~5%</td>
+                <td>Humanize the brand — only what leadership approves</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Growth tactics that actually work</h3>
+          <ul>
+            <li><strong>Reply thoughtfully</strong> on Arcium ecosystem posts — add value, don't spam links. Link only when directly relevant.</li>
+            <li><strong>Quote-tweet with context</strong> when partners or ecosystem accounts share news. Add "here's how to get started" when appropriate.</li>
+            <li><strong>Threads weekly</strong> — one solid explainer beats ten weak one-liners.</li>
+            <li><strong>Consistency &gt; virality</strong> — 1–2 quality posts/day beats random bursts.</li>
+            <li><strong>Cross-post carefully</strong> — Discord/Telegram announcements can become tweet threads with different hooks.</li>
+            <li><strong>Track what works</strong> — note which tweets get saves, profile clicks, and link clicks. Do more of that format.</li>
+            <li><strong>Collaborate</strong> — ask partners to quote or co-tweet launch posts (with approval).</li>
+            <li><strong>Lists</strong> — follow and organize ecosystem accounts, dev influencers, and partner leads into private lists for daily engagement.</li>
+          </ul>
+
+          <h3>Metrics that matter</h3>
+          <ul>
+            <li>Profile visits and link clicks (did we drive people to the site?)</li>
+            <li>Saves and bookmarks (is the content useful enough to keep?)</li>
+            <li>Reply quality (are real people engaging?)</li>
+            <li>Follower growth — secondary. A smaller engaged audience beats a large dead one.</li>
+          </ul>
+
+          <div class="callout warn">
+            <strong>Never buy followers or use engagement pods.</strong> They destroy credibility and don't convert to real users.
+          </div>
+        </section>
+
+        <section class="section" id="ideas">
+          <h2>Tweet Ideas (Copy &amp; Adapt)</h2>
+          <p>Swap in real links and screenshots when posting. Always check with the team before announcing dates or unreleased features.</p>
+
+          <h3>Single tweets — awareness</h3>
+          <div class="tweet">
+            <span class="label">Problem → solution</span>
+            <p>
+              Documentation wasn't built for your first day.<br /><br />
+              Arcademy turns scattered docs into a guided path — read, check your understanding, move forward.<br /><br />
+              Start with Arcium Fundamentals → [link]
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Simple definition</span>
+            <p>
+              Arcademy = onboarding infrastructure for the Arcium ecosystem.<br /><br />
+              Not a course marketplace. Not gamification.<br /><br />
+              Just a clear path from "I'm new" to "I'm ready."
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Low-friction CTA</span>
+            <p>
+              New to Arcium?<br /><br />
+              You can try the first lesson without signing up. Create an account when you're ready to save progress.<br /><br />
+              [link]
+            </p>
+          </div>
+
+          <h3>Single tweets — product moments</h3>
+          <div class="tweet">
+            <span class="label">Progress</span>
+            <p>
+              Close the tab. Come back tomorrow.<br /><br />
+              Your place in the program is still there. One account, all your enrollments.
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Quizzes</span>
+            <p>
+              Finishing a lesson isn't a checkbox.<br /><br />
+              Short comprehension checks confirm you actually got the idea — before you go deeper.
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Hub</span>
+            <p>
+              One hub. Curated programs. No doc maze.<br /><br />
+              Browse what's available → [link]
+            </p>
+          </div>
+
+          <h3>Thread starters (expand to 4–6 tweets each)</h3>
+          <div class="tweet">
+            <span class="label">Thread: Why docs fail new users</span>
+            <p>
+              1/ Most products lose users on day one — not because the product is bad, but because onboarding is a pile of links.<br /><br />
+              2/ You don't know what order to read things.<br />
+              3/ You can't tell if you understood it.<br />
+              4/ You leave and never come back.<br /><br />
+              5/ Arcademy fixes this with guided programs + comprehension checks. Thread 👇
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Thread: What happens on Arcademy</span>
+            <p>
+              1/ What actually happens when you use Arcademy (no jargon version):<br /><br />
+              2/ You land on the hub and pick a program — like Arcium Fundamentals.<br />
+              3/ You read a focused lesson.<br />
+              4/ You answer a few check questions.<br />
+              5/ You move to the next lesson. Progress saved.<br /><br />
+              6/ When you finish, you didn't just skim — you proved you got the basics. Start here: [link]
+            </p>
+          </div>
+          <div class="tweet">
+            <span class="label">Thread: For builders</span>
+            <p>
+              1/ Building on Arcium but stuck rereading the same docs?<br /><br />
+              2/ Arcademy Fundamentals is the structured path — fundamentals first, integration later.<br />
+              3/ Less time lost. Smarter questions when you need help.<br /><br />
+              4/ Try lesson 1 free → [link]
+            </p>
+          </div>
+
+          <h3>Engagement prompts (polls &amp; questions)</h3>
+          <ul>
+            <li>"What stopped you the last time you tried to learn a new protocol — too many tabs, no clear order, or something else?"</li>
+            <li>"Be honest: have you ever 'finished' docs without understanding them?"</li>
+            <li>"Would you rather — endless wiki links OR one guided program with progress tracking?"</li>
+          </ul>
+
+          <h3>Partner-facing (use sparingly; get approval)</h3>
+          <ul>
+            <li>"Ecosystem teams: turn your documentation into a governed onboarding program — without building your own LMS."</li>
+            <li>"See where users drop off before it becomes a support ticket."</li>
+            <li>"Standardized onboarding paths across partner programs — same quality bar, one hub."</li>
+          </ul>
+
+          <h3>Milestone templates (fill in when ready)</h3>
+          <ul>
+            <li>"Arcium Fundamentals is live on Arcademy. If you've been waiting for a clear starting point — this is it. [link]"</li>
+            <li>"[X] learners have enrolled in [program]. If you're new to [ecosystem], start here."</li>
+            <li>"New on the hub: [program name] — [one-line description]. [link]"</li>
+          </ul>
+        </section>
+
+        <section class="section" id="calendar">
+          <h2>Sample Weekly Content Calendar</h2>
+          <p>Adjust based on what's launching. This is a rhythm, not a rigid rule.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Suggested focus</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>Motivation + CTA</td>
+                <td>"Start the week with a clear path" + link to Arcium Fundamentals</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>Educational thread</td>
+                <td>Why guided onboarding beats doc sprawl (4–5 tweets)</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>Engagement</td>
+                <td>Poll or question + 30 min replying in ecosystem threads</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>Product highlight</td>
+                <td>Screenshot or GIF of lesson reader / progress / quiz pass</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>Social proof or recap</td>
+                <td>Milestone, quote from a user (with permission), or "what we shipped"</td>
+              </tr>
+              <tr>
+                <td>Weekend</td>
+                <td>Light touch</td>
+                <td>One helpful reply-heavy session OR a single soft CTA tweet</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Daily habit (15–30 minutes)</h3>
+          <ol>
+            <li>Check notifications — reply to every real question within 24 hours.</li>
+            <li>Scan ecosystem lists — leave 3–5 thoughtful replies (not copy-paste).</li>
+            <li>Schedule or draft tomorrow's main post.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="rules">
+          <h2>Do's &amp; Don'ts</h2>
+          <div class="two-col">
+            <div class="card">
+              <h3 class="check">Do</h3>
+              <ul>
+                <li>Link to the live site when inviting people to try Arcademy</li>
+                <li>Use "program," "lesson," "hub," "enroll"</li>
+                <li>Ask the team before announcing dates, partners, or features</li>
+                <li>Screenshot real product UI when you have assets</li>
+                <li>Credit partners when sharing their news</li>
+                <li>Save strong tweets as templates for reuse</li>
+                <li>Report confusing feedback to the team — it's content gold</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 class="x">Don't</h3>
+              <ul>
+                <li>Promise token rewards, NFTs, or "earn crypto for learning"</li>
+                <li>Call Arcademy a school, LMS, or MOOC</li>
+                <li>Attack competitors or other onboarding tools</li>
+                <li>Share internal screenshots with sensitive data</li>
+                <li>Engage in drama — stay helpful and neutral</li>
+                <li>Post the same link 10 times a day (spam filters hurt reach)</li>
+                <li>Invent features that aren't live yet</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>When to get approval first</h3>
+          <ul>
+            <li>Any post mentioning a partner by name</li>
+            <li>Launch dates, metrics, or user counts</li>
+            <li>Anything about pricing, legal, or data sharing</li>
+            <li>Crisis responses (outages, bugs, negative press)</li>
+            <li>Giveaways, contests, or paid promotions</li>
+          </ul>
+        </section>
+
+        <section class="section" id="cheatsheet">
+          <h2>One-Page Cheat Sheet</h2>
+          <div class="cheatsheet">
+            <h3>Arcademy in 30 seconds</h3>
+            <ul>
+              <li><strong>What:</strong> Guided onboarding programs for the Arcium ecosystem</li>
+              <li><strong>Who it's for:</strong> New users and developers who need a clear starting path</li>
+              <li><strong>First program:</strong> Arcium Fundamentals</li>
+              <li><strong>How it works:</strong> Hub → pick program → read lessons → pass checks → progress saved</li>
+              <li><strong>Tone:</strong> Calm, credible, helpful — never hype</li>
+              <li><strong>Never say:</strong> school, LMS, XP, streaks, token rewards</li>
+              <li><strong>Best CTA:</strong> Try lesson 1 (low friction) → [site link]</li>
+            </ul>
+          </div>
+
+          <h3 style="margin-top: 20px">Useful links (fill in with live URLs)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>When to use in tweets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hub home</td>
+                <td>General discovery, brand awareness</td>
+              </tr>
+              <tr>
+                <td>/programs</td>
+                <td>"See everything available"</td>
+              </tr>
+              <tr>
+                <td>Arcium Fundamentals program page</td>
+                <td>Primary CTA for most early tweets</td>
+              </tr>
+              <tr>
+                <td>First lesson (guest preview)</td>
+                <td>"Try before you sign up" campaigns</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="note">
+            Related internal docs: <em>PLATFORM-OVERVIEW.md</em> (product truth), <em>arcademy-product-overview.html</em> (partner-facing overview). When in doubt, PLATFORM-OVERVIEW wins.
+          </p>
+        </section>
+      </main>
+
+      <aside class="toc">
+        <h4>On this page</h4>
+        <a href="#welcome">Welcome</a>
+        <a href="#pitch">The Pitch</a>
+        <a href="#not">What We Are Not</a>
+        <a href="#glossary">Glossary</a>
+        <a href="#website">Website</a>
+        <a href="#audience">Audience</a>
+        <a href="#voice">Brand Voice</a>
+        <a href="#strategy">Growth Strategy</a>
+        <a href="#ideas">Tweet Ideas</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#rules">Do's &amp; Don'ts</a>
+        <a href="#cheatsheet">Cheat Sheet</a>
+      </aside>
+    </div>
+    <footer>Arcademy Twitter staff guide · Internal use · May 2026</footer>
+  </body>
+</html>
